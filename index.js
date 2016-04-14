@@ -33,8 +33,17 @@ app.get('/teams/new', function(req, res) {
   res.render("new");
 });
 
-app.get('/teams/:id', function(req, res) {
-  res.render("team", {team: teams[id]});
+app.get('/teams/:name', function(req, res) {
+  // search for the team name in all the teams.
+  var team = undefined;
+  for(var i = 0; i < teams.length; i++) {
+    if (teams[i].name === req.params.name) {
+      team = teams[i];
+    }
+  }
+
+  // return the team that we found with the name.
+  res.render("team", {team: team});
 });
 
 app.delete('/teams/:id', function(req, res) {
