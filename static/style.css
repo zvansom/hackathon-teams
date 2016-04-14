@@ -1,0 +1,10 @@
+body {
+  background-color: goldenrod;
+}
+
+div {
+  margin-top: 1em;
+  padding: 1em;
+  background-color: white;
+  border: solid black 1px;
+}
