@@ -8,7 +8,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(ejsLayouts);    
 app.use(express.static(__dirname + '/static'));
 
-
 var teams = [
   {name: "Burrito Nullito", members: "Chris, Jessica, Dan"},
   {name: "Undefined Yet Refined", members: "Abe, Ada, Al"},
@@ -46,10 +45,18 @@ app.get('/teams/:name', function(req, res) {
   res.render("team", {team: team});
 });
 
-app.delete('/teams/:id', function(req, res) {
-  var index = parseInt(req.params.id, 10);
+app.delete('/teams/:name', function(req, res) {
+  var index = undefined;
+  var team  = undefined;
+  for(var i = 0; i < teams.length; i++) {
+    if (teams[i].name === req.params.name) {
+      index = i;
+      team = teams[i];
+    }
+  }
+
   teams.splice(index, 1);
-  res.redirect("/teams");
+  res.send({teams: teams, deleted: team});
 });
 
 app.listen(3000);
