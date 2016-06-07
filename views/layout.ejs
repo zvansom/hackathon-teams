@@ -2,27 +2,29 @@
 <html>
   <head>
     <title>Hackathon Teams</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Ceattle Sity Hackathon</h1>
-    <%- body %>
+    <div class="container">
+      <h1>Ceattle Sity Hackathon</h1>
+      <%- body %>
 
-    <div>
-      <p>
-        <a href="/">Home</a>
-      </p>
+      <ul class="list-inline">
+        <li>
+          <a class="btn btn-primary" href="/">Home</a>
+        </li>
 
-      <p>
-        <a href="/teams">see teams</a>
-      </p>
+        <li>
+          <a class="btn btn-primary" href="/teams">See teams</a>
+        </li>
 
-      <p>
-        <a href="/teams/new">sign up</a>
-      </p>
+        <li>
+          <a class="btn btn-primary" href="/teams/new">Sign Up</a>
+        </li>
+      </ul>
     </div>
 
-    <script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo=" crossorigin="anonymous"></script>
     <script src="/js/teams-ajax.js"></script>
   </body>
 </html>
