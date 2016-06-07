@@ -1,27 +1,15 @@
 var express = require('express');
 var fs = require('fs');
+var teamService = require('../models/teamService');
 var router = express.Router();
 
-function getTeams() {
-  var teams = fs.readFileSync('./models/data.json');
-  return JSON.parse(teams);
-}
-
-function setTeams(teamData) {
-  fs.writeFileSync('./models/data.json', JSON.stringify(teamData));
-}
-
 router.get('/', function(req, res) {
-  var teams = getTeams();
+  var teams = teamService.allTeams();
   res.render('teams/index', { teams: teams });
 });
 
 router.post('/', function(req, res) {
-  var teams = getTeams();
-  var newTeam = req.body;
-
-  teams.push(newTeam);
-  setTeams(teams);
+  teamService.addTeam(req.body);
 
   res.redirect('/teams');
 });
@@ -32,31 +20,27 @@ router.get('/new', function(req, res) {
 
 router.get('/:name', function(req, res) {
   // search for the team name in all the teams.
-  var teams = getTeams();
-  var team = {};
+  var team = teamService.getTeam(req.params.name);
 
-  for (var i = 0; i < teams.length; i++) {
-    if (teams[i].name === req.params.name) {
-      team = teams[i];
-    }
-  }
   res.render('teams/show', { team: team });
 });
 
 router.delete('/:name', function(req, res) {
-  var teams = getTeams();
-  var index = -1;
-  var team = null;
+  teamService.deleteTeam(req.params.name);
 
-  for (var i = 0; i < teams.length; i++) {
-    if (teams[i].name === req.params.name) {
-      index = i;
-      team = teams[i];
-    }
-  }
+  res.send({ message: 'success' });
+});
 
-  teams.splice(index, 1);
-  res.send({ teams: teams, deleted: team });
+router.get('/:name/edit', function(req, res) {
+  var team = teamService.getTeam(req.params.name);
+
+  res.render('teams/edit', { team: team });
+});
+
+router.put('/:name', function(req, res) {
+  teamService.editTeam(req.params.name, req.body);
+
+  res.send({ message: 'success' });
 });
 
 module.exports = router;
