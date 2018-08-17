@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var ejsLayouts = require('express-ejs-layouts');
+
 var app = express();
 
 app.set('view engine', 'ejs');
@@ -14,4 +15,6 @@ app.get('/', function(req, res) {
 
 app.use('/teams', require('./controllers/teams'));
 
-app.listen(3000);
+app.listen(3000, function() {
+  console.log("You're listening to the smooth sounds of port 3000 in the morning");
+});
