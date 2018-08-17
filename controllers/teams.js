@@ -20,9 +20,15 @@ router.get('/new', function(req, res) {
 
 router.get('/:name', function(req, res) {
   // search for the team name in all the teams.
-  var team = teamService.getTeam(req.params.name);
+  const team = teamService.getTeam(req.params.name);
 
   res.render('teams/show', { team: team });
+});
+
+router.get('/:name/edit', (req, res) => {
+  const team = teamService.getTeam(req.params.name);
+
+  res.render('teams/edit', { team })
 });
 
 module.exports = router;
