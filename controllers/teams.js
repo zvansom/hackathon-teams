@@ -31,4 +31,10 @@ router.get('/:name/edit', (req, res) => {
   res.render('teams/edit', { team })
 });
 
+
+router.delete('/:name', (req, res) => {
+  teamService.deleteTeam(req.params.name);
+  res.send(200);
+});
+
 module.exports = router;

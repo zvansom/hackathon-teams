@@ -19,7 +19,6 @@ $(document).ready(function() {
   $('#delete-btn').click(function(e) {
     e.preventDefault();
     let teamUrl = $(this).attr('href');
-    console.log(teamUrl);
 
     $.ajax({
       method: "DELETE",
