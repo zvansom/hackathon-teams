@@ -31,6 +31,10 @@ router.get('/:name/edit', (req, res) => {
   res.render('teams/edit', { team })
 });
 
+router.put('/:name/edit', (req, res) => {
+  teamService.editTeam(req.params.name, req.body);
+  res.send(200);
+});
 
 router.delete('/:name', (req, res) => {
   teamService.deleteTeam(req.params.name);
